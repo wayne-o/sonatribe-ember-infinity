@@ -1,5 +1,5 @@
 {
-  "name": "ember-infinity",
+  "name": "sonatribe-ember-infinity",
   "version": "0.2.1",
   "description": "Simple, flexible infinite scroll for Ember CLI Apps.",
   "directories": {
@@ -11,7 +11,7 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "https://github.com/hhff/ember-infinity",
+  "repository": "https://github.com/hhff/sonatribe-ember-infinity",
   "engines": {
     "node": ">= 0.10.0"
   },
@@ -50,6 +50,6 @@
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
-    "demoURL": "http://hhff.github.io/ember-infinity/"
+    "demoURL": "http://hhff.github.io/sonatribe-ember-infinity/"
   }
 }

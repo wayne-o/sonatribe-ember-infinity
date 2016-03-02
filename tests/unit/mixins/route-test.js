@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import RouteMixin from 'ember-infinity/mixins/route';
+import RouteMixin from 'sonatribe-ember-infinity/mixins/route';
 import { module, test } from 'qunit';
 
 module('RouteMixin');

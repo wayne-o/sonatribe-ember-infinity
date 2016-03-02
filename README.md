@@ -1,15 +1,15 @@
 # Ember Infinity
-[![Build Status](https://travis-ci.org/hhff/ember-infinity.svg)](https://travis-ci.org/hhff/ember-infinity)
-[![npm version](https://badge.fury.io/js/ember-infinity.svg)](http://badge.fury.io/js/ember-infinity)
-[![Ember Observer Score](http://emberobserver.com/badges/ember-infinity.svg)](http://emberobserver.com/addons/ember-infinity)
+[![Build Status](https://travis-ci.org/hhff/sonatribe-ember-infinity.svg)](https://travis-ci.org/hhff/sonatribe-ember-infinity)
+[![npm version](https://badge.fury.io/js/sonatribe-ember-infinity.svg)](http://badge.fury.io/js/sonatribe-ember-infinity)
+[![Ember Observer Score](http://emberobserver.com/badges/sonatribe-ember-infinity.svg)](http://emberobserver.com/addons/sonatribe-ember-infinity)
 
-[![Code Climate](https://codeclimate.com/github/hhff/ember-infinity/badges/gpa.svg)](https://codeclimate.com/github/hhff/ember-infinity)
-[![Dependency Status](https://david-dm.org/hhff/ember-infinity.svg)](https://david-dm.org/hhff/ember-infinity)
-[![devDependency Status](https://david-dm.org/hhff/ember-infinity/dev-status.svg)](https://david-dm.org/hhff/ember-infinity#info=devDependencies)
+[![Code Climate](https://codeclimate.com/github/hhff/sonatribe-ember-infinity/badges/gpa.svg)](https://codeclimate.com/github/hhff/sonatribe-ember-infinity)
+[![Dependency Status](https://david-dm.org/hhff/sonatribe-ember-infinity.svg)](https://david-dm.org/hhff/sonatribe-ember-infinity)
+[![devDependency Status](https://david-dm.org/hhff/sonatribe-ember-infinity/dev-status.svg)](https://david-dm.org/hhff/sonatribe-ember-infinity#info=devDependencies)
 
 ***As of v0.1.0, this library officially supports Ember 1.10 through to 2.0+ (Canary), and (aside from a few buggy versions), Ember Data pre-1.0 through to 2.0+ (Canary).  We plan to support 1.10 for the foreseeable future.***
 
-Demo: [hhff.github.io/ember-infinity/](http://hhff.github.io/ember-infinity/)
+Demo: [hhff.github.io/sonatribe-ember-infinity/](http://hhff.github.io/sonatribe-ember-infinity/)
 
 Simple, flexible infinite scrolling for Ember CLI Apps.  Works out of the box
 with the [Kaminari Gem](https://github.com/amatsuda/kaminari.git).
@@ -19,7 +19,7 @@ repo, but without using controllers, in preparation for Ember 2.0.
 
 ## Installation
 
-`ember install ember-infinity`
+`ember install sonatribe-ember-infinity`
 
 **Note:** If you're getting an error like `semver is not defined`, you probably did `npm install` instead of `ember install`.  We use [ember-version-is](https://github.com/hhff/ember-version-is) to manage the code for different versions of Ember & Ember Data, which relies on semver.  `npm install` won't run the nested generator that adds semver to your app.
 
@@ -27,7 +27,7 @@ repo, but without using controllers, in preparation for Ember 2.0.
 
 ```js
 import Ember from 'ember';
-import InfinityRoute from "ember-infinity/mixins/route";
+import InfinityRoute from "sonatribe-ember-infinity/mixins/route";
 
 export default Ember.Route.extend(InfinityRoute, {
   model() {
@@ -57,7 +57,7 @@ When the new records are loaded, they will automatically be pushed into the Mode
 
 ### JSON Request/Response Customization
 
-By default, ember-infinity will send pagination parameters as part of a GET request as follows
+By default, sonatribe-ember-infinity will send pagination parameters as part of a GET request as follows
 
 ```
 /items?per_page=5&page=1
@@ -81,7 +81,7 @@ If you wish to customize some aspects of the JSON contract for pagination, you m
 
 ```js
 import Ember from 'ember';
-import InfinityRoute from "ember-infinity/mixins/route";
+import InfinityRoute from "sonatribe-ember-infinity/mixins/route";
 
 export default Ember.Route.extend(InfinityRoute, {
   
@@ -102,7 +102,7 @@ This will result in request query params being sent out as follows
 /items?per=5&pg=1
 ``` 
 
-and ember-infinity will be set up to parse the total number of pages from a JSON response like this:
+and sonatribe-ember-infinity will be set up to parse the total number of pages from a JSON response like this:
 
 ```js
 {
@@ -168,7 +168,7 @@ properties and the respective values will be included in the request:
 
 ```js
 import Ember from 'ember';
-import InfinityRoute from 'ember-infinity/mixins/route';
+import InfinityRoute from 'sonatribe-ember-infinity/mixins/route';
 
 export default Ember.Route.extend(InfinityRoute, {
   ...
@@ -276,7 +276,7 @@ Triggered on the route when the infinityModel is fully loaded.
 
 ```js
 import Ember from 'ember';
-import InfinityRoute from 'ember-infinity/mixins/route';
+import InfinityRoute from 'sonatribe-ember-infinity/mixins/route';
 
 export default Ember.Route.extend(InfinityRoute, {
   ...
@@ -376,7 +376,7 @@ scrollable will default to using the window for the scroll binding.
 
 You can optionally pass an offset value.   This value will be used when calculating if the bottom of the scrollable has been reached.  
 
-### Use ember-infinity with button
+### Use sonatribe-ember-infinity with button
 
 You can use the route loading magic of Ember Infinity without using the InfinityLoader component.
 

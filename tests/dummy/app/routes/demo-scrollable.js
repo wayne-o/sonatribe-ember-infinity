@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import InfinityRoute from 'ember-infinity/mixins/route';
+import InfinityRoute from 'sonatribe-ember-infinity/mixins/route';
 import Pretender from 'pretender';
 import faker from 'faker';
 import json from '../helpers/json';
