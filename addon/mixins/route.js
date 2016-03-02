@@ -30,7 +30,7 @@ const RouteMixin = Ember.Mixin.create({
 	  @type Integer
 	  @default 0
 	*/
-	_skip: 0,
+	_skip: -25,
 
 	/**
 	  @private
@@ -193,8 +193,8 @@ const RouteMixin = Ember.Mixin.create({
 			return (totalPages && currentPage !== undefined) ? (currentPage < totalPages) : false;
 
 		} else {
-			let totalPages = this.get('_totalRecords') / this.get('take');
-			let currentPage = this.get('skip') / this.get('take');
+			let totalPages = Math.round(this.get('_totalRecords') / this.get('_take'));
+			let currentPage = this.get('_skip') / this.get('_take');
 
 			return (totalPages && currentPage !== undefined) ? (currentPage < totalPages) : false;
 		}
@@ -239,13 +239,14 @@ const RouteMixin = Ember.Mixin.create({
 		}
 
 		this.set('_infinityModelName', modelName);
+        this.set('useSkipTakeMethod', options.useSkipTakeMethod || false)
 
 		this._ensureCompatibility();
 
 		options = options ? Ember.merge({}, options) : {};
 		let modelPath = options.modelPath || this.get('_modelPath');
 
-		if (!this.get('useSkipTakeMethod')) {
+        if (!options.useSkipTakeMethod) {
 			let startingPage = options.startingPage === undefined ? 0 : options.startingPage - 1;
 			let perPage = options.perPage || this.get('_perPage');
 
@@ -268,12 +269,17 @@ const RouteMixin = Ember.Mixin.create({
 			return this._loadNextPage();
 		} else {
 
+            this.set('takeParam', options.takeParam);            this.set('skipParam', options.skipParam);
+
+
 			let skip = options.skip || this.get('_skip');
 			let take = options.take || this.get('_take');
 
 			delete options.skip;
 			delete options.take;
 			delete options.modelPath;
+            delete options.skipParam;
+            delete options.takeParam;
 
 			this.setProperties({
 				_firstPageLoaded: false,
@@ -364,8 +370,8 @@ const RouteMixin = Ember.Mixin.create({
 				.then(
 					this._afterInfinityModel(this));
 		} else {
-			let nextSkip = this.get('skip') + this.get('take');
-			this.set('skip', nextSkip);
+			let nextSkip = this.get('_skip') + this.get('_take');
+			this.set('_skip', nextSkip);
 			const params = this._buildParams(nextSkip);
 
 			return this.get('store')[this._storeFindMethod](modelName, params)
