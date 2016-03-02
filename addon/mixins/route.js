@@ -410,6 +410,8 @@ const RouteMixin = Ember.Mixin.create({
 					.forEach(k => params[k] = this.get(boundParams[k]));
 			}
 
+      delete params.useSkipTakeMethod;
+
 			return params;
 		}
 	},
