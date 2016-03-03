@@ -239,14 +239,14 @@ const RouteMixin = Ember.Mixin.create({
 		}
 
 		this.set('_infinityModelName', modelName);
-        this.set('useSkipTakeMethod', options.useSkipTakeMethod || false)
+		this.set('useSkipTakeMethod', options.useSkipTakeMethod || false);
 
 		this._ensureCompatibility();
 
 		options = options ? Ember.merge({}, options) : {};
 		let modelPath = options.modelPath || this.get('_modelPath');
 
-        if (!options.useSkipTakeMethod) {
+		if (!options.useSkipTakeMethod) {
 			let startingPage = options.startingPage === undefined ? 0 : options.startingPage - 1;
 			let perPage = options.perPage || this.get('_perPage');
 
@@ -269,7 +269,8 @@ const RouteMixin = Ember.Mixin.create({
 			return this._loadNextPage();
 		} else {
 
-            this.set('takeParam', options.takeParam);            this.set('skipParam', options.skipParam);
+			this.set('takeParam', options.takeParam);
+			this.set('skipParam', options.skipParam);
 
 
 			let skip = options.skip || this.get('_skip');
@@ -278,8 +279,8 @@ const RouteMixin = Ember.Mixin.create({
 			delete options.skip;
 			delete options.take;
 			delete options.modelPath;
-            delete options.skipParam;
-            delete options.takeParam;
+			delete options.skipParam;
+			delete options.takeParam;
 
 			this.setProperties({
 				_firstPageLoaded: false,
@@ -360,6 +361,7 @@ const RouteMixin = Ember.Mixin.create({
 	 @returns {Ember.RSVP.Promise} A Promise that resolves the next page of objects
 	 */
 	_requestNextPage() {
+		this._notifyInfinityModelLoading();
 		const modelName = this.get('_infinityModelName');
 
 		if (!this.get('useSkipTakeMethod')) {
@@ -416,7 +418,7 @@ const RouteMixin = Ember.Mixin.create({
 					.forEach(k => params[k] = this.get(boundParams[k]));
 			}
 
-      delete params.useSkipTakeMethod;
+			delete params.useSkipTakeMethod;
 
 			return params;
 		}
@@ -556,6 +558,28 @@ const RouteMixin = Ember.Mixin.create({
 	},
 
 	/**
+	 notify that the infinity model has been updated
+
+	 @private
+	 @method _notifyInfinityModelLoading
+	 */
+	_notifyInfinityModelLoading() {
+		if (!this.infinityModelLoading) {
+			return;
+		}
+
+		if (!this.get('useSkipTakeMethod')) {
+			Ember.run.scheduleOnce('afterRender', this, 'infinityModelLoading', {
+
+			});
+		} else {
+			Ember.run.scheduleOnce('afterRender', this, 'infinityModelLoading', {
+
+			});
+		}
+	},
+
+	/**
 	 finish the loading cycle by notifying that infinity has been reached
 
 	 @private
@@ -571,10 +595,10 @@ const RouteMixin = Ember.Mixin.create({
 				totalPages: totalPages
 			});
 		} else {
-      let totalRecords = this.get('_totalRecords');
-      Ember.run.scheduleOnce('afterRender', this, 'infinityModelLoaded', {
-        totalRecords: totalRecords
-      });
+			let totalRecords = this.get('_totalRecords');
+			Ember.run.scheduleOnce('afterRender', this, 'infinityModelLoaded', {
+				totalRecords: totalRecords
+			});
 		}
 	}
 });
